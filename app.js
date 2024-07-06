@@ -1,21 +1,14 @@
-var a = 1;
-var b = 2;
-var c = a + b;
-
-console.log(c);
-
-var greet = () => {
-    return "Hello World";
+var person = {
+    firstName: 'Wilfried',
+    lastName: 'Majaliwa',
+    greet: function() {
+        return  `Hello ${this.firstName} ${this.lastName}!`
+    }
 }
 
-function sayHi(fn) {
-    console.log(fn() + " from Wilfried");
-}
+var nameIs = person.greet()
+console.log(nameIs)
 
-sayHi(greet);
-
-function logGreeting(fn) {
-    fn();
-}
-
-logGreeting(() => console.log("logger"));
+var iAm = person['greet'] // storing a reference to the greet function
+var boundIAm = person['greet'].bind(person)
+console.log(boundIAm())
