@@ -1,14 +1,16 @@
-var person = {
-    firstName: 'Wilfried',
-    lastName: 'Majaliwa',
-    greet: function() {
-        return  `Hello ${this.firstName} ${this.lastName}!`
-    }
+function Person(lastname, firstname) {
+    this.lastname = lastname // this is an empty object when a new Person is created
+    this.firstname = firstname
 }
 
-var nameIs = person.greet()
-console.log(nameIs)
+Person.prototype.greet = function() {
+    return `Heya ${this.lastname}`
+}
 
-var iAm = person['greet'] // storing a reference to the greet function
-var boundIAm = person['greet'].bind(person)
-console.log(boundIAm())
+var wilfried = new Person('Majaliwa', 'Wilfried')
+// console.log(wilfried.lastname)
+console.log(wilfried.greet())
+
+var maria = new Person('Nansikombi', 'Maria')
+// console.log(wilfried.lastname)
+console.log(maria.greet())
