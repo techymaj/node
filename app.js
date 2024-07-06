@@ -1,21 +1,7 @@
-// pass by value
+(
+    function () {
+        console.log("Hi")
+    }
+)
 
-function change(b) {
-    b = 2
-}
-
-let a = 1;
-
-change(a)
-
-console.log(a)
-
-function changeObj(d) {
-    d.prop1 = function() {}
-    d.prop2 = {}
-}
-
-let c = {}
-c.prop1 = {}
-changeObj(c)
-console.log(c)
+() // it's now an expression
