@@ -1,17 +1,21 @@
-const obj = {
-    name: 'John Doe',
-    greet: function() {
-        console.log(`Hey, ${this.name}!`);
+const EventEmitter = require('node:events').EventEmitter;
+
+class Greetr extends EventEmitter {
+
+     constructor() {
+         super();
+         this.greeting = 'Hello World!';
+     }
+
+    start() {
+        console.log('Starting Greetr!');
+        this.emit('start');
     }
 }
 
-obj.greet();
-obj.greet.call({
-    name: 'Majaliwa'
-}); // whatever is passed to call overwrites the 'this' keyword reference,
-// extra params are passed as arguments, comma delimited
+const greetr = new Greetr();
+greetr.on('start', () => {
+    console.log('Greetr started...');
+})
 
-obj.greet.apply({
-    name: 'Majaliwa'
-}); // whatever is passed to apply overwrites the 'this' keyword reference,
-// extra params are in an array
+greetr.start();
