@@ -1,15 +1,24 @@
-const person = {
-    firstname: '',
-    lastname: '',
-    greet: function () {
-        console.log(`Hi, ${this.firstname} ${this.lastname}`);
-    }
+const EventEmitter = require('node:events');
+const util = require('node:util');
+
+function Greetr() {
+    this.greeting = 'Hello World!';
 }
 
-// create this object(wilfried) from person (a prototype)
-const wilfried = Object.create(person); // wilfried's prototype is person
-wilfried.firstname = 'Wilfried';
-wilfried.lastname = 'Majaliwa';
-wilfried.greet();
+// any objects created from Greetr should also have access
+// to the properties and methods on the prototype of EventEmitter
+util.inherits(Greetr, EventEmitter);
+// inherits(childConstructor, superConstructor)
 
-console.log(wilfried.__proto__);
+Greetr.prototype.start = function (data) {
+    console.log(`Greetr started! ${data}`);
+    this.emit('ready', data);
+}
+
+const startGreetr = new Greetr();
+
+startGreetr.on('ready', data => {
+    console.log(`Greetr ready! with data: ${data}`);
+})
+
+startGreetr.start('boy, do I have data for you!');
