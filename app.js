@@ -1,4 +1,4 @@
-const Emitter = require('./emitter');
+const Emitter = require('node:events'); // use node: for native modules
 
 const event = new Emitter();
 
