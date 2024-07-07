@@ -1,27 +1,17 @@
-const EventEmitter = require('node:events');
-// const util = require('node:util');
-
-class Greetr extends EventEmitter {
-    start(data) {
-        console.log(`Greetr started! ${data}`);
-        this.emit('ready', data);
+const obj = {
+    name: 'John Doe',
+    greet: function() {
+        console.log(`Hey, ${this.name}!`);
     }
 }
 
-// any objects created from Greetr should also have access
-// to the properties and methods on the prototype of EventEmitter
-// util.inherits(Greetr, EventEmitter);
-// inherits(childConstructor, superConstructor)
+obj.greet();
+obj.greet.call({
+    name: 'Majaliwa'
+}); // whatever is passed to call overwrites the 'this' keyword reference,
+// extra params are passed as arguments, comma delimited
 
-// Greetr.prototype.start = function (data) {
-//     // console.log(`Greetr started! ${data}`);
-//     // this.emit('ready', data);
-// }
-
-const startGreetr = new Greetr();
-
-startGreetr.on('ready', data => {
-    console.log(`Greetr ready! with data: ${data}`);
-})
-
-startGreetr.start('boy, do I have data for you!');
+obj.greet.apply({
+    name: 'Majaliwa'
+}); // whatever is passed to apply overwrites the 'this' keyword reference,
+// extra params are in an array
