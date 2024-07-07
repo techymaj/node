@@ -1,7 +1,4 @@
-(
-    function () {
-        console.log("Hi")
-    }
-)
+const greet = require('./greetings');
 
-() // it's now an expression
+greet.english();
+greet.spanish();
