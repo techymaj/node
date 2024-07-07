@@ -1,18 +1,15 @@
-const Emitter = require('node:events'); // use node: for native modules
-const EventConfig = require('./config').events;
+const person = {
+    firstname: '',
+    lastname: '',
+    greet: function () {
+        console.log(`Hi, ${this.firstname} ${this.lastname}`);
+    }
+}
 
-const emitr = new Emitter();
+// create this object(wilfried) from person (a prototype)
+const wilfried = Object.create(person); // wilfried's prototype is person
+wilfried.firstname = 'Wilfried';
+wilfried.lastname = 'Majaliwa';
+wilfried.greet();
 
-emitr.on(EventConfig.SAVE, () => {
-    console.log('save save');
-})
-emitr.on(EventConfig.SAVE, () => {
-    console.log('autosave');
-})
-emitr.on(EventConfig.LOGOUT, () => {
-    console.log('you\'ve been logged out');
-})
-
-emitr.emit(EventConfig.SAVE);
-emitr.emit(EventConfig.LOGOUT);
-
+console.log(wilfried.__proto__);
