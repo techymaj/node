@@ -1,16 +1,18 @@
 const Emitter = require('node:events'); // use node: for native modules
+const EventConfig = require('./config').events;
 
-const event = new Emitter();
+const emitr = new Emitter();
 
-event.on('onSave', () => {
+emitr.on(EventConfig.SAVE, () => {
     console.log('save save');
 })
-event.on('onSave', () => {
-    console.log('auto save');
+emitr.on(EventConfig.SAVE, () => {
+    console.log('autosave');
 })
-event.on('logout', () => {
+emitr.on(EventConfig.LOGOUT, () => {
     console.log('you\'ve been logged out');
 })
 
-event.emit('onSave');
-event.emit('logout')
+emitr.emit(EventConfig.SAVE);
+emitr.emit(EventConfig.LOGOUT);
+
