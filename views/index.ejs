@@ -1,8 +1,26 @@
 <html lang="">
     <head>
         <link rel="stylesheet" href="/assets/style.css"/>
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     </head>
     <body>
         <h1>Rendered!</h1>
+    <form action="/person" method="post">
+        <input name="firstname">
+        <input name="lastname">
+        <button>Submit</button>
+    </form>
+    <script>
+        $.ajax({
+            type: "POST",
+            url: "personjson",
+            data: JSON.stringify({
+                firstname: "Wilfried",
+                lastname: "Majaliwa"
+            }),
+            dataType: "json",
+            contentType: "application/json"
+        });
+    </script>
     </body>
 </html>

@@ -1,7 +1,15 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 
 const app = express();
 
+const urlencondedParser = bodyParser.urlencoded({ extended: false });
+const jsonParser = bodyParser.json();
+
+// parse req.body for JSON and forms
+
+
+// set template engine
 app.set('view engine', 'ejs');
 
 // when the browser issue a GET for /assets/style.css, fire up the /assets endpoint
@@ -20,10 +28,17 @@ app.get('/', (req, res) => {
     res.render('index');
 })
 
+app.post('/person', urlencondedParser, (req, res) => {
+    res.send('Thank you!');
+    console.log(req.body.firstname);
+    console.log(req.body.lastname);
+})
+
 app.get('/person/:id', (req, res) => {
     console.log(req.body);
     res.render('person', {
-        ID: req.params.id
+        ID: req.params.id,
+        Qstr: req.query.qstr
     });
 })
 
@@ -35,6 +50,12 @@ app.get('/api', (req, res) => {
         }
     )
 });
+
+app.post('/personjson', jsonParser, (req, res) => {
+    res.send('Thank you for the JSON data!');
+    console.log(req.body.firstname);
+    console.log(req.body.lastname);
+})
 
 const port = process.env.PORT || 8000;
 
