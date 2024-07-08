@@ -1,11 +1,16 @@
 const fs = require('node:fs');
+const zlib = require('node:zlib');
 
-const readable = fs.createReadStream(__dirname+'/greet.txt', {
-    encoding: 'utf8', // to get strings instead of buffers
-    highWaterMark: 100 * 1024 // number of bytes we want our buffer size to be
-});
+const readable = fs.createReadStream(__dirname+'/greet.txt');
 
 const writableStream = fs.createWriteStream(__dirname+'/greetcopy.txt');
 
-readable.on('data', chunk => writableStream.write(chunk));
+const compressed = fs.createWriteStream(__dirname+'/greet.txt.gz');
+
+const gzip = zlib.createGzip(); // duplex stream
+
+readable.pipe(writableStream); // create a copy of greet.txt
+
+readable.pipe(gzip) // send my readable chunk to my writable stream
+    .pipe(compressed); // get the compressed chunk and write it to the .gz file
 
