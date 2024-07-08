@@ -1,0 +1,31 @@
+{
+  "name": "learn-node",
+  "version": "1.0.0",
+  "description": "learning node",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/techymaj/node.git"
+  },
+  "keywords": [
+    "learning",
+    "node",
+    "with",
+    "alicea"
+  ],
+  "author": "techymaj",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/techymaj/node/issues"
+  },
+  "homepage": "https://github.com/techymaj/node#readme",
+  "dependencies": {
+    "moment": "^2.30.1"
+  },
+  "devDependencies": {
+    "jasmine-node": "^3.0.0"
+  }
+}
