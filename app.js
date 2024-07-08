@@ -1,5 +1,9 @@
-const buffer = new ArrayBuffer(8); // from v8, new es6 feature
-const view = new Uint32Array(buffer);
+const fs = require('node:fs');
 
-view.set([65, 66]);
-console.log(view);
+const greet = fs.readFileSync(`${__dirname}/greet.txt`, 'utf8');
+console.log(greet);
+
+fs.readFile(`${__dirname}/greet.txt`, 'utf8', (err, data) => {
+    console.log(data);
+});
+console.log('done!');
