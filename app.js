@@ -1,9 +1,11 @@
 const fs = require('node:fs');
 
-const greet = fs.readFileSync(`${__dirname}/greet.txt`, 'utf8');
-console.log(greet);
-
-fs.readFile(`${__dirname}/greet.txt`, 'utf8', (err, data) => {
-    console.log(data);
+const readable = fs.createReadStream(__dirname+'/greet.txt', {
+    encoding: 'utf8', // to get strings instead of buffers
+    highWaterMark: 100 * 1024 // number of bytes we want our buffer size to be
 });
-console.log('done!');
+
+const writableStream = fs.createWriteStream(__dirname+'/greetcopy.txt');
+
+readable.on('data', chunk => writableStream.write(chunk));
+
