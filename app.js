@@ -2,6 +2,8 @@ const express = require('express');
 
 const app = express();
 
+app.set('view engine', 'ejs');
+
 // when the browser issue a GET for /assets/style.css, fire up the /assets endpoint
 // and look for the specific static files after /assets in the folder public
 app.use('/assets', express.static(`${__dirname}/public`));
@@ -13,18 +15,16 @@ app.use('/', function (req, res, next) {
    next();
 });
 
-
-
 app.get('/', (req, res) => {
     console.log(req.body);
-    res.send('<html><head><link rel="stylesheet" href="/assets/style.css"/></head></head><body><h1>Hello World!</h1></body></html>');
+    res.render('index');
 })
 
 app.get('/person/:id', (req, res) => {
     console.log(req.body);
-    res.send(`
-    <html><body><h1>Person ${req.params.id}</h1></body></html>
-`);
+    res.render('person', {
+        ID: req.params.id
+    });
 })
 
 app.get('/api', (req, res) => {
