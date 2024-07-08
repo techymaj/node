@@ -1,9 +1,5 @@
-const buffer = new Buffer.alloc(5, 'hello', 'utf-8');
-console.log(buffer);
-console.log(buffer.toString('utf8')); // utf8 is the default encoding
-console.log(buffer.toJSON());
-console.log(buffer[3].toString());
+const buffer = new ArrayBuffer(8); // from v8, new es6 feature
+const view = new Uint32Array(buffer);
 
-buffer.write('wo');
-
-console.log(buffer.toString('utf8'));
+view.set([65, 66]);
+console.log(view);
