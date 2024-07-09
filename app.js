@@ -1,13 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const apiController = require('./controllers/apiController');
 
 const app = express();
-
-const urlencondedParser = bodyParser.urlencoded({ extended: false });
-const jsonParser = bodyParser.json();
-
-// parse req.body for JSON and forms
-
 
 // set template engine
 app.set('view engine', 'ejs');
@@ -28,12 +23,6 @@ app.get('/', (req, res) => {
     res.render('index');
 })
 
-app.post('/person', urlencondedParser, (req, res) => {
-    res.send('Thank you!');
-    console.log(req.body.firstname);
-    console.log(req.body.lastname);
-})
-
 app.get('/person/:id', (req, res) => {
     console.log(req.body);
     res.render('person', {
@@ -42,20 +31,7 @@ app.get('/person/:id', (req, res) => {
     });
 })
 
-app.get('/api', (req, res) => {
-    res.json(
-        {
-            name: "Majaliwa M. Wilfried",
-            age: 29
-        }
-    )
-});
-
-app.post('/personjson', jsonParser, (req, res) => {
-    res.send('Thank you for the JSON data!');
-    console.log(req.body.firstname);
-    console.log(req.body.lastname);
-})
+apiController(app);
 
 const port = process.env.PORT || 8000;
 
